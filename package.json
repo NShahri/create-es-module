@@ -1,0 +1,45 @@
+{
+  "name": "create-es-module",
+  "version": "0.1.4",
+  "description": "Helper to create es module",
+  "bin": {
+    "create-es-module": "./src/index.js"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/NShahri/create-es-module",
+  "author": "Nima Shahri <https://github.com/NShahri>",
+  "bugs": {
+    "url": "https://github.com/NShahri/create-es-module/issues"
+  },
+  "files": [
+    "src/**/*"
+  ],
+  "scripts": {
+    "format": "prettier --config ./.prettierrc --write \"src/**/*.js\" && module-grouping 'src/**/*.js' --write",
+    "precomit": "lint-staged"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.19.0",
+    "fs-extra": "^7.0.1",
+    "validate-npm-package-name": "^3.0.0"
+  },
+  "devDependencies": {
+    "husky": "^1.1.3",
+    "lint-staged": "^8.0.4",
+    "module-grouping-cli": "^0.1.0",
+    "prettier": "^1.15.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "prettier --config ./.prettierrc --write",
+      "module-grouping --write",
+      "git add"
+    ]
+  }
+}
