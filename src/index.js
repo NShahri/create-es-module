@@ -55,6 +55,7 @@ const root = path.resolve(projectName);
 const appName = path.basename(root);
 
 checkAppName(appName);
+fs.ensureDirSync(projectName);
 
 if (!isSafeToCreateProjectIn(root, appName)) {
     process.exit(1);
