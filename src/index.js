@@ -28,26 +28,18 @@ const program = new commander.Command(packageJson.name)
     .option('--typescript')
     .allowUnknownOption()
     .on('--help', () => {
-        console.log(
-            `    Only ${chalk.green('<project-directory>')} is required.`
-        );
+        console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
     })
     .parse(process.argv);
 
 if (!projectName) {
     console.error('Please specify the project directory:');
-    console.log(
-        `  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`
-    );
+    console.log(`  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`);
     console.log();
     console.log('For example:');
-    console.log(
-        `  ${chalk.cyan(program.name())} ${chalk.green('my-es-module')}`
-    );
+    console.log(`  ${chalk.cyan(program.name())} ${chalk.green('my-es-module')}`);
     console.log();
-    console.log(
-        `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
-    );
+    console.log(`Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`);
     process.exit(1);
 }
 
@@ -67,22 +59,18 @@ const modulePackageJson = {
     private: true,
     main: 'build/cjs/index.js',
     module: 'build/esm/index.js',
+    files: ['build/**/*'],
     scripts: {
         test: 'jest',
         prepublish: 'npm run build',
         prebuild: 'rimraf build/',
         build: 'npm run build:cjs && npm run build:esm',
-        'build:esm':
-            'BABEL_ENV=esm babel src --out-dir build/esm/ --ignore "src/**/*.test.js"',
-        'build:cjs':
-            'BABEL_ENV=cjs babel src --out-dir build/cjs/ --ignore "src/**/*.test.js"',
+        'build:esm': 'BABEL_ENV=esm babel src --out-dir build/esm/ --ignore "src/**/*.test.js"',
+        'build:cjs': 'BABEL_ENV=cjs babel src --out-dir build/cjs/ --ignore "src/**/*.test.js"',
     },
 };
 
-fs.writeFileSync(
-    path.join(root, 'package.json'),
-    JSON.stringify(modulePackageJson, null, 2) + os.EOL
-);
+fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify(modulePackageJson, null, 2) + os.EOL);
 
 copyTemplateFiles(root);
 
