@@ -13,9 +13,7 @@ module.exports = function checkAppName(appName) {
     const validationResult = validateProjectName(appName);
     if (!validationResult.validForNewPackages) {
         console.error(
-            `Could not create a project called ${chalk.red(
-                `"${appName}"`
-            )} because of npm naming restrictions:`
+            `Could not create a project called ${chalk.red(`"${appName}"`)} because of npm naming restrictions:`
         );
         printValidationResults(validationResult.errors);
         printValidationResults(validationResult.warnings);

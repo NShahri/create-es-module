@@ -1,14 +1,7 @@
 const chalk = require('chalk');
 const spawn = require('cross-spawn');
 
-module.exports = function installDependencies(
-    root,
-    useYarn,
-    usePnp,
-    dependencies,
-    verbose,
-    isOnline
-) {
+module.exports = function installDependencies(root, useYarn, usePnp, dependencies, verbose, isOnline) {
     return new Promise((resolve, reject) => {
         let command;
         let args;
@@ -33,26 +26,16 @@ module.exports = function installDependencies(
 
             if (!isOnline) {
                 console.log(chalk.yellow('You appear to be offline.'));
-                console.log(
-                    chalk.yellow('Falling back to the local Yarn cache.')
-                );
+                console.log(chalk.yellow('Falling back to the local Yarn cache.'));
                 console.log();
             }
         } else {
             command = 'npm';
-            args = [
-                'install',
-                '--save',
-                '--save-exact',
-                '--loglevel',
-                'error',
-            ].concat(dependencies);
+            args = ['install', '--save', '--save-exact', '--loglevel', 'error'].concat(dependencies);
 
             if (usePnp) {
                 console.log(chalk.yellow("NPM doesn't support PnP."));
-                console.log(
-                    chalk.yellow('Falling back to the regular installs.')
-                );
+                console.log(chalk.yellow('Falling back to the regular installs.'));
                 console.log();
             }
         }

@@ -2,11 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 
-const errorLogFilePatterns = [
-    'npm-debug.log',
-    'yarn-error.log',
-    'yarn-debug.log',
-];
+const errorLogFilePatterns = ['npm-debug.log', 'yarn-error.log', 'yarn-debug.log'];
 
 const validFiles = [
     '.DS_Store',
@@ -34,27 +30,16 @@ module.exports = function isSafeToCreateProjectIn(root, name) {
         // IntelliJ IDEA creates module files before CRA is launched
         .filter(file => !/\.iml$/.test(file))
         // Don't treat log files from previous installation as conflicts
-        .filter(
-            file =>
-                !errorLogFilePatterns.some(
-                    pattern => file.indexOf(pattern) === 0
-                )
-        );
+        .filter(file => !errorLogFilePatterns.some(pattern => file.indexOf(pattern) === 0));
 
     if (conflicts.length > 0) {
-        console.log(
-            `The directory ${chalk.green(
-                name
-            )} contains files that could conflict:`
-        );
+        console.log(`The directory ${chalk.green(name)} contains files that could conflict:`);
         console.log();
         for (const file of conflicts) {
             console.log(`  ${file}`);
         }
         console.log();
-        console.log(
-            'Either try using a new directory name, or remove the files listed above.'
-        );
+        console.log('Either try using a new directory name, or remove the files listed above.');
 
         return false;
     }
