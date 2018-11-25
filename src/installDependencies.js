@@ -31,7 +31,7 @@ module.exports = function installDependencies(root, useYarn, usePnp, dependencie
             }
         } else {
             command = 'npm';
-            args = ['install', '--save', '--save-exact', '--loglevel', 'error'].concat(dependencies);
+            args = ['install', '--save-dev', '--loglevel', 'error'].concat(dependencies);
 
             if (usePnp) {
                 console.log(chalk.yellow("NPM doesn't support PnP."));
