@@ -7,7 +7,7 @@ module.exports = function installDependencies(root, useYarn, usePnp, dependencie
         let args;
         if (useYarn) {
             command = 'yarnpkg';
-            args = ['add', '--exact', '--dev'];
+            args = ['add', '--dev'];
             if (!isOnline) {
                 args.push('--offline');
             }
