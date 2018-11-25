@@ -1,6 +1,6 @@
 {
   "name": "create-es-module",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Helper to create es module",
   "bin": {
     "create-es-module": "./src/index.js"
