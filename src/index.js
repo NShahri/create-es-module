@@ -87,6 +87,8 @@ installDependencies(
         '@babel/preset-flow',
         '@babel/preset-react',
         'jest',
+        'babel-jest',
+        'babel-core@^7.0.0-bridge.0',
         'rimraf',
     ],
     program.verbose,

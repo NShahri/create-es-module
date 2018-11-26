@@ -1,4 +1,5 @@
 const presets = [['@babel/preset-env'], '@babel/preset-react', '@babel/preset-flow'];
+const plugins = ['@babel/plugin-proposal-class-properties'];
 
 if (process.env['BABEL_ENV'] === 'esm') {
     presets[0] = [
@@ -12,8 +13,9 @@ if (process.env['BABEL_ENV'] === 'esm') {
             shippedProposals: true,
         },
     ];
+
+    plugins.push('@babel/plugin-transform-runtime');
 }
 
-const plugins = ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties'];
 
 module.exports = {presets, plugins};
