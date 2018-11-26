@@ -12,7 +12,7 @@ const copyTemplateFiles = require('./copyTemplateFiles');
 const installDependencies = require('./installDependencies');
 const isSafeToCreateProjectIn = require('./isSafeToCreateProjectIn');
 
-let projectName;
+let projectName = '';
 
 const program = new commander.Command(packageJson.name)
     .version(packageJson.version)
@@ -86,7 +86,6 @@ installDependencies(
         '@babel/preset-env',
         '@babel/preset-flow',
         '@babel/preset-react',
-        'flow-bin',
         'jest',
         'rimraf',
     ],

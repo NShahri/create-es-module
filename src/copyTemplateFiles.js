@@ -4,8 +4,6 @@ const path = require('path');
 module.exports = function copyTemplateFiles(root) {
     fs.copySync(require.resolve('./templates/.editorconfig'), path.join(root, '.editorconfig'));
 
-    fs.copySync(require.resolve('./templates/.flowconfig'), path.join(root, '.flowconfig'));
-
     fs.copySync(require.resolve('./templates/.gitignore'), path.join(root, '.gitignore'));
 
     fs.copySync(require.resolve('./templates/babel.config.js'), path.join(root, 'babel.config.js'));
