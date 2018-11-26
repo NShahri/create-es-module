@@ -18,6 +18,20 @@ npx create-es-module my-module
 
 It will create `my-module` folder with the default structure.
 
+## Installing added dependencies
+
+you need to install added dependencies manually
+```
+cd my-module
+npm install
+``` 
+or 
+```
+cd my-module
+yarn install 
+```
+`--enable-pnp` and `--offline` can be used by yarn.
+
 ## Build
 `yarn build` or `npm run build`
 Builds the module for production to the `build` folder.
@@ -34,7 +48,7 @@ For more information about list of files in the package visit https://docs.npmjs
 You need to add `flow-bin` as dev dependency and run `init` command.
 ```
 yarn add flow-bin --dev
-npx flow --init
+npx flow init
 ```
 
 ## Add `react` and use JSX  
@@ -48,10 +62,11 @@ yarn add react
 - Unit test
 - module build and cjs build
 
-## 
-
 ## TODO
-- make react optional
+- Add optional `prettier`
+- Add optional `module-grouping-cli`
+- Add optional `eslint`
+
 
 ## Credits
 Credit to [create-react-app](https://github.com/facebook/create-react-app).

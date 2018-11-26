@@ -9,7 +9,6 @@ const path = require('path');
 const packageJson = require('../package.json');
 const checkAppName = require('./checkAppName');
 const copyTemplateFiles = require('./copyTemplateFiles');
-const installDependencies = require('./installDependencies');
 const isSafeToCreateProjectIn = require('./isSafeToCreateProjectIn');
 
 let projectName = '';
@@ -21,11 +20,6 @@ const program = new commander.Command(packageJson.name)
     .action(name => {
         projectName = name;
     })
-    .option('--verbose', 'print additional logs')
-    .option('--info', 'print environment debug info')
-    .option('--use-npm')
-    .option('--use-pnp')
-    .option('--typescript')
     .allowUnknownOption()
     .on('--help', () => {
         console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
@@ -68,29 +62,24 @@ const modulePackageJson = {
         'build:esm': 'BABEL_ENV=esm babel src --out-dir build/esm/ --ignore "src/**/*.test.js"',
         'build:cjs': 'BABEL_ENV=cjs babel src --out-dir build/cjs/ --ignore "src/**/*.test.js"',
     },
+    devDependencies: {
+        '@babel/cli': '^7.1.5',
+        '@babel/core': '^7.1.6',
+        '@babel/plugin-proposal-class-properties': '^7.1.0',
+        '@babel/plugin-transform-runtime': '^7.1.0',
+        '@babel/preset-env': '^7.1.6',
+        '@babel/preset-flow': '^7.0.0',
+        '@babel/preset-react': '^7.0.0',
+        'babel-core': '^7.0.0-bridge.0',
+        'babel-jest': '^23.6.0',
+        jest: '^23.6.0',
+        rimraf: '^2.6.2',
+    },
+    dependencies: {
+        '@babel/runtime': '^7.1.5',
+    },
 };
 
 fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify(modulePackageJson, null, 2) + os.EOL);
 
 copyTemplateFiles(root);
-
-installDependencies(
-    root,
-    true,
-    false,
-    [
-        '@babel/cli',
-        '@babel/core',
-        '@babel/plugin-proposal-class-properties',
-        '@babel/plugin-transform-runtime',
-        '@babel/preset-env',
-        '@babel/preset-flow',
-        '@babel/preset-react',
-        'jest',
-        'babel-jest',
-        'babel-core@^7.0.0-bridge.0',
-        'rimraf',
-    ],
-    program.verbose,
-    true
-);
