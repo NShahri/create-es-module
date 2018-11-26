@@ -1,5 +1,7 @@
+'use strict';
+
 const presets = [['@babel/preset-env'], '@babel/preset-react', '@babel/preset-flow'];
-const plugins = ['@babel/plugin-proposal-class-properties'];
+const plugins = [['@babel/plugin-proposal-class-properties', {loose: true}]];
 
 if (process.env['BABEL_ENV'] === 'esm') {
     presets[0] = [
@@ -13,9 +15,10 @@ if (process.env['BABEL_ENV'] === 'esm') {
             shippedProposals: true,
         },
     ];
-
-    plugins.push('@babel/plugin-transform-runtime');
 }
 
+if (process.env['BABEL_ENV'] === 'esm' || process.env['BABEL_ENV'] === 'cjs') {
+    plugins.push('@babel/plugin-transform-runtime');
+}
 
 module.exports = {presets, plugins};
