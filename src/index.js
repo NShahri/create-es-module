@@ -47,6 +47,11 @@ if (!isSafeToCreateProjectIn(root, appName)) {
     process.exit(1);
 }
 
+const enablePrettier = true;
+const enablePreCommit = undefined;
+const enableFlow = undefined;
+const enableLinting = undefined;
+
 const modulePackageJson = {
     name: appName,
     version: '0.1.0',
@@ -61,6 +66,11 @@ const modulePackageJson = {
         build: 'npm run build:cjs && npm run build:esm',
         'build:esm': 'BABEL_ENV=esm babel src --out-dir build/esm/ --ignore "src/**/*.test.js"',
         'build:cjs': 'BABEL_ENV=cjs babel src --out-dir build/cjs/ --ignore "src/**/*.test.js"',
+        format:
+            enablePrettier &&
+            'prettier --config ./.prettierrc --write "src/**/*.{js,jsx,css,scss,html,json}" && module-grouping \'src/**/*.{js,jsx}\' --write',
+        lint: 'eslint src',
+        precomit: enablePreCommit && 'lint-staged',
     },
     devDependencies: {
         '@babel/cli': '^7.1.5',
@@ -74,9 +84,22 @@ const modulePackageJson = {
         'babel-jest': '^23.6.0',
         jest: '^23.6.0',
         rimraf: '^2.6.2',
+        prettier: '^1.15.2',
+        'module-grouping-cli': enablePrettier && '^0.1.0',
+        'lint-staged': enablePreCommit && '^8.1.0',
+        'flow-bin': enableFlow && '^0.89.0',
+        "eslint-config-prettier": enableLinting && "^3.0.1",
+        "eslint-plugin-flowtype": enableLinting && "^3.0.0",
+        "eslint-plugin-import": enableLinting && "^2.13.0",
+        "eslint-plugin-jsx-a11y": enableLinting && "^6.1.0",
+        "eslint-plugin-react": enableLinting && "^7.10.0",
     },
     dependencies: {
         '@babel/runtime': '^7.1.5',
+    },
+    'lint-staged': enablePreCommit && {
+        '*.{scss,css,html,json}': ['prettier --config ./.prettierrc --write', 'git add'],
+        '*.{js,jsx}': ['prettier --config ./.prettierrc --write', 'module-grouping --write', 'git add'],
     },
 };
 

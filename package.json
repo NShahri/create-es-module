@@ -24,6 +24,7 @@
     "src/**/*"
   ],
   "scripts": {
+    "test": "echo There is not test to run",
     "format": "prettier --config ./.prettierrc --write \"src/**/*.js\" && module-grouping 'src/**/*.js' --write",
     "precomit": "lint-staged"
   },
@@ -37,7 +38,7 @@
   "devDependencies": {
     "husky": "^1.1.3",
     "lint-staged": "^8.0.4",
-    "module-grouping-cli": "^0.1.0",
+    "module-grouping-cli": "^0.2.9",
     "prettier": "^1.15.2"
   },
   "husky": {
