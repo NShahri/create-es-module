@@ -1,6 +1,6 @@
 {
   "name": "create-es-module",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "Helper to create es module",
   "keywords": [
     "ecmascript",
